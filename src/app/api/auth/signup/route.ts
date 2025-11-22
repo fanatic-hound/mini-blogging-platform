@@ -4,6 +4,8 @@ import { prisma } from '@/lib/prisma'
 import { createToken, setSession } from '@/lib/auth'
 import { signupSchema } from '@/lib/validations'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
