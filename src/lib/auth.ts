@@ -8,10 +8,11 @@ const secret = new TextEncoder().encode(
 export interface JWTPayload {
   userId: string
   email: string
+  [key: string]: unknown
 }
 
 export async function createToken(payload: JWTPayload): Promise<string> {
-  return await new SignJWT(payload)
+  return await new SignJWT({ ...payload })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime('7d')
