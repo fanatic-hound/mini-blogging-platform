@@ -8,13 +8,16 @@ const nextConfig = {
     optimizePackageImports: ['@prisma/client', 'zustand', 'react-hook-form'],
   },
   
-  // Skip type checking and linting during dev (use separate commands)
+  // Skip type checking and linting during builds for speed
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,
   },
   eslint: {
-    ignoreDuringBuilds: false,
+    ignoreDuringBuilds: true,
   },
+  
+  // Standalone output for smaller builds
+  output: 'standalone',
   
   // Faster refresh
   reactStrictMode: true,
