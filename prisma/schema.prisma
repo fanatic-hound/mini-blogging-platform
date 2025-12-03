@@ -6,8 +6,8 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // Uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // Uses direct connection
+  url       = env("POSTGRES_URL_NON_POOLING")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
@@ -23,12 +23,12 @@ model User {
 model Blog {
   id        String   @id @default(cuid())
   title     String
-  content   String   @db.Text
+  content   String
   published Boolean  @default(true)
   authorId  String
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   @@index([authorId])
 }
