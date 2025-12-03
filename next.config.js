@@ -16,8 +16,8 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   
-  // Standalone output for smaller builds
-  output: 'standalone',
+  // Remove standalone output for Vercel
+  // output: 'standalone',
   
   // Faster refresh
   reactStrictMode: true,
@@ -25,9 +25,10 @@ const nextConfig = {
   // Ensure Prisma engine binaries are included in the build
   webpack: (config, { isServer }) => {
     if (isServer) {
-      config.externals.push({
-        '@prisma/client': '@prisma/client',
-      })
+      // Don't externalize Prisma Client
+      config.externals = config.externals.filter(
+        (external) => typeof external !== 'string' || !external.includes('@prisma/client')
+      )
     }
     return config
   },
