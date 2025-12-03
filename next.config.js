@@ -21,6 +21,16 @@ const nextConfig = {
   
   // Faster refresh
   reactStrictMode: true,
+
+  // Ensure Prisma engine binaries are included in the build
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals.push({
+        '@prisma/client': '@prisma/client',
+      })
+    }
+    return config
+  },
 }
 
 module.exports = nextConfig
