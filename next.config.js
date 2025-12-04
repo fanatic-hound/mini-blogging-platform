@@ -5,7 +5,7 @@ const nextConfig = {
   
   // Reduce memory usage
   experimental: {
-    optimizePackageImports: ['@prisma/client', 'zustand', 'react-hook-form'],
+    optimizePackageImports: ['zustand', 'react-hook-form'],
     serverComponentsExternalPackages: ['@prisma/client', '@prisma/engines'],
   },
   
