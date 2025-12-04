@@ -6,6 +6,7 @@ const nextConfig = {
   // Reduce memory usage
   experimental: {
     optimizePackageImports: ['@prisma/client', 'zustand', 'react-hook-form'],
+    serverComponentsExternalPackages: ['@prisma/client', '@prisma/engines'],
   },
   
   // Skip type checking and linting during builds for speed
@@ -16,22 +17,8 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   
-  // Remove standalone output for Vercel
-  // output: 'standalone',
-  
   // Faster refresh
   reactStrictMode: true,
-
-  // Ensure Prisma engine binaries are included in the build
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      // Don't externalize Prisma Client
-      config.externals = config.externals.filter(
-        (external) => typeof external !== 'string' || !external.includes('@prisma/client')
-      )
-    }
-    return config
-  },
 }
 
 module.exports = nextConfig
